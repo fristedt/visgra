@@ -395,8 +395,20 @@ The final transformation matrix T is
 
 \section*{Task 1.5: Rotations (Bonus)}
 
+Using the trigonometric identities
+
 \[
-  R(\theta_1)R(\theta_2) =
+  \sin(\alpha \pm \beta )=\sin \alpha \cos \beta \pm \cos \alpha \sin \beta
+\]
+\[
+  \cos(\alpha \pm \beta )=\cos \alpha \cos \beta \mp \sin \alpha \sin \beta
+\]
+
+we get
+
+\begin{align*} 
+\begin{split}
+  R(\theta_1)R(\theta_2) &=
   \begin{bmatrix}
     \cos{\theta_1} & -\sin{\theta_1}\\
     \sin{\theta_1} & \cos{\theta_1}\\
@@ -404,6 +416,20 @@ The final transformation matrix T is
   \begin{bmatrix}
     \cos{\theta_2} & -\sin{\theta_2}\\
     \sin{\theta_2} & \cos{\theta_2}\\
-  \end{bmatrix}
-\]
+  \end{bmatrix}\\
+  &=
+  \begin{bmatrix}
+    \cos\theta_1\cos\theta_2 - \sin\theta_1\sin\theta_2 & -\cos\theta_1\sin\theta_2 - \sin\theta_1\cos\theta_2\\
+    \sin\theta_1\cos\theta_2 + \cos\theta_1\sin\theta_2 & -\sin\theta_1\sin\theta_2 + \cos\theta_1\cos\theta_2
+  \end{bmatrix}\\
+  &=
+  \begin{bmatrix}
+    \cos{(\theta_1 + \theta_2)} & -\sin{(\theta_1 + \theta_2)}\\
+    \sin{(\theta_1 + \theta_2)} & \cos{(\theta_1 + \theta_2)}
+  \end{bmatrix}\\
+  &= 
+  R(\theta_1 + \theta_2)
+\end{split}
+\end{align*} 
+QED.
 \end{document}

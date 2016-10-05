@@ -7,6 +7,7 @@
 //#include <raytracer/Math.hpp>
 
 
+const float RAD2DEG = 180.0f/3.14159265359f;
 int gWidth = 800;  ///< The width of the OpenGL window
 int gHeight = 600; ///< The height of the OpenGL window
 GLFWwindow* gGLFWWindow;
@@ -233,7 +234,11 @@ bool initDice()
   // It is helpful to compute this transformation on a sheet of paper.
 
   //gDice[5] should be the cube with number 6 facing the camera
-  gDice[5]->modelMatrix().translate(3,3,5);
+  gDice[5]->modelMatrix().translate(0,0,-.5f);
+  float sqrt3 = std::sqrt(3);
+  /* gDice[5]->modelMatrix().rotate(RAD2DEG * std::acos(1.0f/sqrt3), ogl::Vec3f(-1, 1, 0)); */
+  gDice[5]->modelMatrix().rotate(ogl::Vec3f(0, 0, 1), ogl::Vec3f(1, 1, 1));
+  gDice[5]->modelMatrix().translate(2.5f, 3, 4 + sqrt3 / 2);
 
   return true;
 }

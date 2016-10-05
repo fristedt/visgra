@@ -22,11 +22,33 @@ std::shared_ptr<ogl::TriangleGeometry> gLightSphere[3];    ///< Three point ligh
 std::shared_ptr<ogl::TriangleGeometry> gGroundPlane;       ///< The ground plane
 std::shared_ptr<ogl::TriangleGeometry> gAxisArrows[3];     ///< XYZ (RGB) coordinate widget
 float gLastFrameTime=0.f;     
+ogl::Vec3f center(3, 3, 0);
+float theta = 0;
+float rad = 5;
+const float RAD_MAX = 8;
+const float RAD_MIN = 4;
+const float DIST_MAX = (RAD_MAX - RAD_MIN) / 2;
+float radIncrement = .1f;
 
 std::string gDataPath= ""; ///< The path pointing to the resources (OBJ, shader)
 // Display the dice
 void displayDice()
 {
+  ogl::Vec3f pos = gDice[5]->getPosition();
+  gDice[5]->modelMatrix().translate(-pos + ogl::Vec3f(rad * std::cos(theta), rad * std::sin(theta), 0));
+  gDice[5]->modelMatrix().translate(center);
+  theta += gLastFrameTime * .25f;
+
+/*   float dist = std::min(RAD_MAX - rad, rad - RAD_MIN); */
+/*   float scaling = std::abs(dist / DIST_MAX); */
+
+/*   if (dist < 0) */
+/*     radIncrement = -radIncrement; */
+
+/*   std::cout << "dist: " << dist << std::endl; */
+/*   std::cout << "scaling: " << scaling << std::endl; */
+  rad = 6 + 2 * std::sin(theta * 8);
+
   for(size_t i=0;i<gDice.size();++i)
   {
     // Set the updated light positions
@@ -234,11 +256,11 @@ bool initDice()
   // It is helpful to compute this transformation on a sheet of paper.
 
   //gDice[5] should be the cube with number 6 facing the camera
-  gDice[5]->modelMatrix().translate(0,0,-.5f);
-  float sqrt3 = std::sqrt(3);
-  /* gDice[5]->modelMatrix().rotate(RAD2DEG * std::acos(1.0f/sqrt3), ogl::Vec3f(-1, 1, 0)); */
-  gDice[5]->modelMatrix().rotate(ogl::Vec3f(0, 0, 1), ogl::Vec3f(1, 1, 1));
-  gDice[5]->modelMatrix().translate(2.5f, 3, 4 + sqrt3 / 2);
+  /* gDice[5]->modelMatrix().translate(0,0,-.5f); */
+  /* float sqrt3 = std::sqrt(3); */
+  /* /1* gDice[5]->modelMatrix().rotate(RAD2DEG * std::acos(1.0f/sqrt3), ogl::Vec3f(-1, 1, 0)); *1/ */
+  /* gDice[5]->modelMatrix().rotate(ogl::Vec3f(0, 0, 1), ogl::Vec3f(1, 1, 1)); */
+  /* gDice[5]->modelMatrix().translate(2.5f, 3, 4 + sqrt3 / 2); */
 
   return true;
 }

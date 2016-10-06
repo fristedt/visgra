@@ -1,0 +1,183 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+%\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{systeme} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\normalfont} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\makeatletter
+\newcommand{\Spvek}[2][r]{%
+  \gdef\@VORNE{1}
+  \left(\hskip-\arraycolsep%
+  \begin{array}{#1}\vekSp@lten{#2}\end{array}%
+\hskip-\arraycolsep\right)}
+
+\def\vekSp@lten#1{\xvekSp@lten#1;vekL@stLine;}
+\def\vekL@stLine{vekL@stLine}
+\def\xvekSp@lten#1;{\def\temp{#1}%
+  \ifx\temp\vekL@stLine
+  \else
+  \ifnum\@VORNE=1\gdef\@VORNE{0}
+  \else\@arraycr\fi%
+  #1%
+  \expandafter\xvekSp@lten
+\fi}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+  \normalfont \normalsize 
+  \textsc{Introduction to Visualization and Computer Graphics, Fall 2016} \\ [25pt] % Your university, school and/or department name(s)
+  \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+  \huge Assignment 3\\ % The assignment title
+  \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Hampus Fristedt} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\section*{Task 3.1: Linear Index Mapping}
+
+\subsection*{(a)}
+
+Let $f: (i, j, k) \rightarrow l$. Then $f(i, j, k) = i + n_xj + n_xn_yk$.
+
+\subsection*{(b)}
+
+Let $g: l \rightarrow (i, j, k)$. Then $g(l) = (l \mod n_x, \left \lfloor\frac{l}{n_x} \right \rfloor \mod n_y, \left \lfloor\frac{l}{n_xn_y} \right \rfloor)$.
+
+\section*{Task 3.2: Order Independence of Bi-linear Interpolation}
+
+Let $f_x(x, y)$ denote the bi-linear interpolation starting with the x-direction and $f_y(x, y)$ denote the bi-linear interpolation starting with the y-direction.
+
+\subsubsection*{x-direction first}
+
+We start by applying linear interpolating on the pairs $(f_{00}, f_{10})$ and $(f_{01}, f_{11})$ to obtain the values $f(x, 0)$ and $f(x, 1)$.
+
+\begin{align*}
+  \begin{split}
+    f(x, 0) &= (1 - x)f_{00} + xf_{10}\\
+    f(x, 1) &= (1 - x)f_{01} + xf_{11}
+  \end{split}
+\end{align*}
+
+We then interpolate between those values to obtain $f_x(x, y)$.
+
+\begin{align*}
+  \begin{split}
+    f_x(x, y) &= (1 - y)f(x, 0) + yf(x, 1)\\
+		   &= (1 - y)(1 - x)f_{00} + (1 - y)xf_{10} + y(1 - x)f_{01} + xyf_{11}\\
+    &= (1-x)(1-y)f_{00} + x(1 - y)f_{10} + y(1 - x)f_{01} + xyf_{11}
+  \end{split}
+\end{align*}
+
+\subsubsection*{y-direction first}
+
+If we instead start by interpolating between $(f_{00}, f_{01})$ and $(f_{10}, f_{11})$ we get the following
+
+\begin{align*}
+  \begin{split}
+    f(0, y) &= (1 - y)f_{00} + yf_{01}\\
+    f(1, y) &= (1 - y)f_{10} + yf_{11}
+  \end{split}
+\end{align*}
+
+and after interpolating between those values in the x-direction we get
+
+\begin{align*}
+  \begin{split}
+    f_y(x, y) &= (1 - x)f(0, y) + yf(1, y)\\
+	    &= (1 - x)(1 - y)f_{00} + (1 - x)yf_{01} + x(1 - y)f_{10} + xyf_{11}\\
+     &= (1-x)(1-y)f_{00} + x(1 - y)f_{10} + y(1 - x)f_{01} + xyf_{11}\\
+    &= f_x(x, y)
+  \end{split}
+\end{align*}
+
+$\hfill\square$
+
+\section*{Task 3.3: Interpolation}
+
+\subsection*{(a)}
+
+Let $s(x, y) = ax + by + c$. We can use the provided scalar values to get a
+linear system of equations.
+
+\begin{align*}
+  \begin{split}
+    s(0, 0) &= c = 1 \Rightarrow c = 1\\
+    s(1, 0) &= a + c = 2 \Rightarrow a = 1\\
+    s(0, 1) &= b + c = 3 \Rightarrow b = 2
+  \end{split}
+\end{align*}
+
+Thus, $s(x, y) = x + 2y + 1$.
+
+\subsection*{(b)}
+
+\begin{align*}
+  \begin{split}
+    s(1/2, 0) &= 1/2 + 1 = 3/2\\
+    s(0, 1/2) &= 2 \cdot 1/2 + 1 = 2\\
+    s(1/2, 1/2) &= 1/2 + 2 \cdot 1/2 + 1 = 5/2\\
+    s(2/3, 2/3) &= 2/3 + 2 \cdot 2/3 + 1 = 3
+  \end{split}
+\end{align*}
+
+\section*{Task 3.4: Triangle Basis Function Gradients}
+\end{document}

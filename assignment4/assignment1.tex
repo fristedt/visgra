@@ -27,6 +27,7 @@
 
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 \usepackage{systeme} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{graphicx} % Used for inserting dummy 'Lorem ipsum' text into the template
 
 \usepackage{sectsty} % Allows customizing section commands
 \allsectionsfont{\normalfont} % Make all sections centered, the default font and small caps
@@ -109,6 +110,54 @@ $\pmb{x}(\frac{1}{3}) = b_0^{(3)} = \Spvek{7; 18}$
 \subsection*{(a)}
 
 asd
+
+\section*{Task 4.3: Piecewise Quadratic B\'ezier Splines}
+
+Let $k_1$, $k_2$ and $k_3$ denote the B\'ezier control points so
+
+\begin{align*}
+  \mathbf {B}_1(t)=(1-t)^{2}a+2(1-t)tk_1+t^{2}b\\
+  \mathbf {B}_2(t)=(1-t)^{2}b+2(1-t)tk_2+t^{2}c\\
+  \mathbf {B}_3(t)=(1-t)^{2}c+2(1-t)tk_3+t^{2}a\\
+\end{align*}
+
+Because $\mathbf{C}^1$-continuity is demanded we have the following constraints.
+
+\begin{align*}
+  \mathbf{B}_1'(1) &= \mathbf{B}_2'(0)\\
+  \mathbf{B}_2'(1) &= \mathbf{B}_3'(0)\\
+  \mathbf{B}_3'(1) &= \mathbf{B}_1'(0)\\
+\end{align*}
+
+Inputing the values into $\mathbf{B}_i'$, $i=1,2,3$, we get
+
+\begin{align*}
+  2(b-k_1) &= 2(k_2-b) \iff k_1+k_2 = 2b\\
+  2(c-k_2) &= 2(k_3-c) \iff k_2+k_3 = 2c\\
+  2(a-k_3) &= 2(k_1-a) \iff k_1+k_3 = 2a\\
+\end{align*}
+
+Which is a linear system with the unique solution
+
+\begin{align*}
+  k_1 &= a+b-c\\
+  k_2 &= -a+b+c\\
+  k_3 &= a-b+c\\
+\end{align*}
+
+A geometric interpretation is that the polygon formed from drawing lines between
+the points $a, k_1, b, k_2, c, k_3, a$ will be a triangle.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{eps}
+  \caption{Example $\mathbf{C}_1$-continous B\'ezier spline}
+\end{figure} 
+
+\hfill
+$\square$
+
+\section*{Task 4.4: Chaikin's Corner Cutting}
 
 \section*{Task 4.5: Bilinear Surfaces}
 

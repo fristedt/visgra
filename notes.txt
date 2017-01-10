@@ -1,0 +1,104 @@
+# Slide 2
+Standard transformations
+Rita av tabell på slide 2 s. 50 och kryssprodukt, men glöm inte dot product
+
+# Slide 3
+Continuous real objects are represented by a finite set of locations, or samples, in space/time.
+This is called a discrete structure.
+
+Grid terminology: point (0d), line (1d), face, voxel
+
+## Data connectivity
+
+Structured grid: connectivity is implicitly given
+	- Block-structured grid: combination of several structured grids
+Refers to the implicitly given connectivity between the grid vertices
+
+Unstructured grid: connectivity is explicitly given
+
+Hybrid grid: combination of different grid types
+
+## Regular or uniform grids
+Cells are rectangles or rectangular cuboids of the same size
+
+All grid lines are parallel to the axes
+
+To define a uniform grid, we need the following:
+Bounding box: ( x min , y min , z min) - ( x max , y max , z max)
+Number of grid vertices in each dimension: 
+	D x , D y , D z 
+	Cell size: d x , d y , d z 
+
+Cartesian grid
+
+Special case of a uniform grid: dx = dy = dz
+Consists of squares (2D), cubes (3D)
+
+## Linear interpolation
+
+f(x) = ((x1 - x) / (x1 - x0)) f(x0) + ((x - x0) / (x1 - x0)) f(x1)
+
+## Bilinear interpolation
+
+f(x, y) = (1 - x)(1 - y)f_{00} + x(1 - y)f_{10} + (1 - x)yf_{01} + xyf_{11}
+
+### Continuities
+Does a particle moving on this curve have a smooth 
+trajectory?
+
+	- C⁰: (discontinuous first derivative) Use higher order interpolation
+	  for smoother transition, e.g., cubic interpolation, not smooth
+	- C¹: Smooth derivative curve
+	- C²: Smooth second derivative curve
+	- C³: - || - third
+
+C - requires that the vectors to and from the intersection point are equal
+G - same as C, but does not require the above
+
+## Function Derivative Estimation (gradients)
+
+\/f(x, y, z) = [d/dx, d/dy, d/dz]
+f(x, y, z) = [df/dx, df/dy, df/dz]
+Describes direction of steepest ascent
+
+## Linear Interpolation in a Triangle
+
+A linear function f(x, y) = a + bx + cy
+Polynomial can be obtained by solving the linear system
+	[1 x0 y0 [a   [f0
+	 1 x1 y1  b =  f1
+	 1 x2 y2] c]   f2]
+- Linear in x and y
+
+## Barycentric coordinates
+
+p = ap1 + bp2 + cp3 with a + b + c = 1
+Rita av bild på sida 60
+
+### Barycentric interpolation in a triangle
+
+f(x, y) = a0(x, y)f0 + a1(x, y)f1 + a2(x, y)f2
+with a0 + a1 + a2 = 1 (barycentric coordinates)
+f0, f1, f2 are the corner vertices of the triangle
+
+Can also solve for unknown coefficients a (cramers rule):
+	[x0 x1 x2 [a0   [x
+	 y0 y1 y2  a1 =  y
+	 1  1  1]  a2]   1]
+
+Gradient of a linearly interpolated function in a 
+triangle/tetrahedron: Constant!
+
+# Slide 4
+
+## Geometric modeling
+
+Geometry describes the form and the position/orientation in a 
+coordinate system.
+
+Topology defines the fundamental structure that is invariant against 
+continuous transformations.
+
+## Skriv upp casteljau om du vill (hampus kan redan den)
+
+

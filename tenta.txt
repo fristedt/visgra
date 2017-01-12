@@ -1,0 +1,9 @@
+﻿Question 8 (1p): Describe the visualization encoding that is best for most data
+and a situation when it is impossible to use it.
+
+Position is the best encoding for most type of data. It cannot be used when
+describing data that is location specific like the air pressure distribution in
+a room.
+
+Question 9 (3p): Describe three ways of presenting information/data that corrupt
+and obstruct reasoning.

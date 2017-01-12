@@ -1,12 +1,14 @@
-# Slide 2
+# Slide 2 (Matte)
+
 Standard transformations
 Rita av tabell på slide 2 s. 50 och kryssprodukt, men glöm inte dot product
 
 # Slide 3 (Grids and Interpolation)
+
 Continuous real objects are represented by a finite set of locations, or samples, in space/time.
 This is called a discrete structure.
 
-Grid terminology: point (0d), line (1d), face, voxel
+Grid terminology: point (0d), line (1d), face (2d), voxel (3d)
 
 ## Data connectivity
 
@@ -34,6 +36,12 @@ Cartesian grid
 Special case of a uniform grid: dx = dy = dz
 Consists of squares (2D), cubes (3D)
 
+## Interpolation
+
+Difference between an interpolating spline and a Bezier spline: spline through
+all 4 control points, Bezier only uses the point 2 and 3 as direction vectors
+for the tangents at the end points of the spline.
+
 ## Linear interpolation
 
 f(x) = ((x1 - x) / (x1 - x0)) f(x0) + ((x - x0) / (x1 - x0)) f(x1)
@@ -46,7 +54,6 @@ f(x, y) = (1 - x)(1 - y)f_{00} + x(1 - y)f_{10} + (1 - x)yf_{01} + xyf_{11}
 Does a particle moving on this curve have a smooth 
 trajectory?
 
-
 Geometric Continuity
 G0: curves are joined
 G1: first derivatives are proportional at the join point
@@ -58,7 +65,6 @@ C1: first derivatives equal
 C2: first and second derivatives are equal
 If t is taken to be time, this implies that the acceleration is continuous.
 Cn: nth derivatives are equal
-
 
 (Add proof JUST IN CASE) on page sid 31 (slide 5)
 
@@ -166,6 +172,15 @@ in a new mesh with only quadrilaterals.
 
 # Slide 6 (Color and Projection)
 
+## OpenGL Coordinates
+
+- Object: geometry is specified in object coordinates, the coordinate system
+  that is local to a 3D model or mesh. Multiplied with modelview matrix to get
+  eye relative coord.
+
+- Eye: Eye coordinates are the "world coordinates": the camera is defined as
+  being at (0, 0, 0) in eye coordinates, looking down the negative z axis.
+
 # Slide 7 (Visibility and Shading)
 
 ## Rasterization
@@ -174,18 +189,20 @@ in a new mesh with only quadrilaterals.
 
 - More efficient than raytracing
 
-- Implement using Painter (old and slow due to overwrite) or Z-Buffering
+- Implement using Painter (sort polygons by depth, draw in back-to-front) or Z-Buffering (pixel-by-pixel)
 
 ## Clipping
 
 Clipping is the process of truncating triangles to fit them inside the viewing
 area.
 
-## Z-Buffering
+## Z-Buffering (Depth-Buffer)
 
-1. Store depth value for each pixel.
+1. Store depth value for each pixel on screen.
 
 2. Rasterize object closest to the camera (lowest z)
+
+3. Causes Z-fighting, same z-value
 
 # Slide 7.1 (Shading Models)
 
@@ -209,10 +226,17 @@ area.
   light is reflected at an equal angle direction around the surface. Creates
   highlights. Glossy part of Phong.
 
-- Glossy Reflection: Phong, wrong but looks ok. Consists of: Ambient, Diffuse
+- Phong: glossy Reflection, wrong but looks ok. Consists of: Ambient, Diffuse
   and Specular.
 
 - Refraction: penna i glas med halva vatten tack
+
+- Normal mapping/Bump: used to create an illusion of more detail for surfaces
+  without increasing the amount of polygons in the rendation. It works by using
+  a data set, usually in the form of an image to represent the normal for
+  reflected light at a certain position. XYZ values for the normal is stored as
+  sepearate colors in the image file. This data set is then applied to a 3D
+  surface and used in the calculation of the reflection from the surface.
 
 ## Local vs. Global Illumination
 
@@ -249,8 +273,8 @@ according to the laws of physics
 
 ## Indirect volume rendering techniques
 
-– Convert/reduce volume data to an intermediate representation (e.g., surface
-representation), which can be rendered with traditional techniques
+- Convert/reduce volume data to an intermediate representation (e.g., surface
+  representation), which can be rendered with traditional techniques
 
 ## Slicing:
 
@@ -275,3 +299,38 @@ display the data
 Rainbow color map: The rainbow color map tends to hide variation in regions of
 low contrast and appears less smooth in regions of high contrast making it hard
 to distinguish between values that are in these regions.
+
+# Animation
+
+## Key-Frame (top-down)
+
+Point in time with fixed loc./rot. of all objects. Interpolate between frames to
+create animation.
+
+## Inverse Kinematics (bottom-up)
+
+Join parts, movement given implicit. Define constraints for movement. No need
+for locations of different parts.
+
+## Principle of Anticipation
+
+Preparation of movement.
+
+## Movement Path
+
+Shaped as arc for natural movement.
+
+# Data Representation
+
+- Nominal: labeling, it allows us to specify whether an entity is equal or not
+  equal to another entity (in terms of the category).
+
+- Ordinal: data is ranking, it can be sorted and arranged in order but the size
+  or the difference between data elements cannot be computed.
+
+- Interval: is measured on a scale in which each position is equidistant, which
+  allows for measuring distance. But since the scale has no zero-point,
+  multiplication and division are not possible.
+
+- Ratio: measured on a scale with a defined zero-point, which allows numbers to
+  be compared as multiples or ratios of one another.

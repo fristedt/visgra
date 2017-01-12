@@ -2,7 +2,7 @@
 Standard transformations
 Rita av tabell på slide 2 s. 50 och kryssprodukt, men glöm inte dot product
 
-# Slide 3
+# Slide 3 (Grids and Interpolation)
 Continuous real objects are represented by a finite set of locations, or samples, in space/time.
 This is called a discrete structure.
 
@@ -99,7 +99,7 @@ Can also solve for unknown coefficients a (cramers rule):
 Gradient of a linearly interpolated function in a 
 triangle/tetrahedron: Constant!
 
-# Slide 4
+# Slide 4 (Geometric Modeling of Curves and Splines)
 
 ## Geometric modeling
 
@@ -111,7 +111,7 @@ continuous transformations.
 
 ## Skriv upp casteljau om du vill (hampus kan redan den)
 
-# Slide 5
+# Slide 5 (Geometric Modeling of Surfaces)
 
 ## Spline surfaces
 We use splines because it maintain C2-cont.
@@ -140,7 +140,7 @@ Solved by tesselation (approximation of surface)
 ## NURBS
 If functions are B-splines => NURBS surface.
 
-# Slide 5.5 
+# Slide 5.5 (Subdivision)
 	
 ## Subdivison surfaces
 Redefines a mesh by splitting the current mesh by some SCALE. Then interpolate to smooth the surface.
@@ -164,9 +164,9 @@ limit mask. Convergence condition: abs(eigenvalue)<= 1.
 Catmull-Clark (used to smooth surface) is a generalization of CURBS, resulting
 in a new mesh with only quadrilaterals.
 
-# Slide 6 (Coloring)
+# Slide 6 (Color and Projection)
 
-# Slide 7 (Visibility & Shading)
+# Slide 7 (Visibility and Shading)
 
 ## Rasterization
 
